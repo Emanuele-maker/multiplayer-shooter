@@ -35,6 +35,23 @@ function init() {
 
     window.addEventListener("keydown", handleKeyDown)
     window.addEventListener("keyup", handleKeyUp)
+    window.addEventListener("touchstart", (event) => {
+        const touches = event.touches
+        for (let i = 0; i < touches.length; i++) {
+            const touch = e.originalEvent.touches[i] || e.originalEvent.changedTouches[i]
+            const x = touch.pageX
+            const y = touch.pageY
+            if (buttonPressed(x, y, mobileControls.leftButton)) {
+                socket.emit("moveLeft")
+            } else if (buttonPressed(x, y, mobileControls.rightButton)) {
+                socket.emit("moveRight")
+            } else if (buttonPressed(x, y, mobileControls.jumpButton)) {
+                socket.emit("jump")
+            } else if (buttonPressed(x, y, mobileControls.shootButton)) {
+                socket.emit("createBullet")
+            }
+        }
+    })
 
     renderGameState()
 }
@@ -67,6 +84,18 @@ function handleKeyDown(event) {
 function handleKeyUp(event) {
     const keyIndex = keysPressed.indexOf(event.keyCode)
     keysPressed.splice(keyIndex, 1)
+}
+
+function buttonPressed(x, y, button) {
+    const topOfButton = button.position.y
+    const bottomOfButton = button.position.y + button.scale.height
+    const leftSideOfButton = button.position.x
+    const rightSideOfButton = button.position.y
+
+    if (x >= leftSideOfButton && x <= rightSideOfButton && y >= topOfButton && y <= bottomOfButton) {
+        return true
+    }
+    return false
 }
 
 function checkInputs() {

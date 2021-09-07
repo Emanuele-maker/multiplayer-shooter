@@ -11,6 +11,22 @@
         img {
             display: none;
         }
+        
+        #dark,
+        #tonno,
+        #watermelon {
+            display: inline;
+            width: 60px;
+            height: 60px
+        }
+        
+        #setTonno,
+        #setWatermelon,
+        #setDark {
+            background-color: white;
+            width: 80px;
+            height: 80px;
+        }
     </style>
 </head>
 
@@ -21,6 +37,12 @@
             <div id="gameScreen" class="h-100">
                 <div class="d-flex flex-column align-items-center justify-content-center h-100">
                     <canvas id="canvas"></canvas>
+                    <br>
+                    <p>
+                        <button id="setTonno"><img src="assets/tonno.png" id="tonno"></button>
+                        <button id="setWatermelon"><img src="assets/watermelon.png" id="watermelon"></button>
+                        <button id="setDark"><img src="assets/dark_skin.png" id="dark"></button>
+                    </p>
                 </div>
             </div>
         </div>
@@ -28,11 +50,8 @@
 
     <img src="assets/bullet_left.png" id="bullet-left">
     <img src="assets/bullet_right.png" id="bullet-right">
-    <img src="assets/dark_skin.png" id="dark">
     <img src="assets/lava.png" id="lava">
     <img src="assets/platform.png" id="platform">
-    <img src="assets/tonno.png" id="tonno">
-    <img src="assets/watermelon.png" id="watermelon">
     <img src="assets/cloud.png" id="cloud">
 
     <img src="assets/shoot_btn.png" id="shoot-btn">

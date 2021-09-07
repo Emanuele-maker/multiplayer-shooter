@@ -24,6 +24,21 @@ const leftButtonImg = document.getElementById("left-btn")
 const rightButtonImg = document.getElementById("right-btn")
 const jumpButtonImg = document.getElementById("jump-btn")
 
+const setTonno = document.getElementById("setTonno")
+const setWatermelon = document.getElementById("setWatermelon")
+const setDark = document.getElementById("setDark")
+
+setTonno.onclick = () => {
+    socket.emit("setTonno")
+    console.log("animation set to tonno!")
+}
+setWatermelon.onclick = () => {
+    socket.emit("setWatermelon")
+}
+setDark.onclick = () => {
+    socket.emit("setDark")
+}
+
 function init() {
     canvas = document.getElementById("canvas")
     ctx = canvas.getContext("2d")
@@ -37,19 +52,17 @@ function init() {
     window.addEventListener("keyup", handleKeyUp)
     window.addEventListener("touchstart", (event) => {
         const touches = event.touches
-        for (let i = 0; i < touches.length; i++) {
-            const touch = e.originalEvent.touches[i] || e.originalEvent.changedTouches[i]
-            const x = touch.pageX
-            const y = touch.pageY
-            if (buttonPressed(x, y, mobileControls.leftButton)) {
-                socket.emit("moveLeft")
-            } else if (buttonPressed(x, y, mobileControls.rightButton)) {
-                socket.emit("moveRight")
-            } else if (buttonPressed(x, y, mobileControls.jumpButton)) {
-                socket.emit("jump")
-            } else if (buttonPressed(x, y, mobileControls.shootButton)) {
-                socket.emit("createBullet")
-            }
+        const touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[i0]
+        const x = touch.pageX
+        const y = touch.pageY
+        if (buttonPressed(x, y, mobileControls.leftButton)) {
+            socket.emit("moveLeft")
+        } else if (buttonPressed(x, y, mobileControls.rightButton)) {
+            socket.emit("moveRight")
+        } else if (buttonPressed(x, y, mobileControls.jumpButton)) {
+            socket.emit("jump")
+        } else if (buttonPressed(x, y, mobileControls.shootButton)) {
+            socket.emit("createBullet")
         }
     })
 

@@ -51,6 +51,16 @@ io.on("connection", socket => {
     socket.on("gameLoop", () => gameLoop())
     socket.on("getGameState", () => io.emit("gameState", state))
 
+    socket.on("setDark", () => {
+        player.animationID = 2
+    })
+    socket.on("setWatermelon", () => {
+        player.animationID = 0
+    })
+    socket.on("setTonno", () => {
+        player.animationID = 1
+    })
+
     socket.on("disconnect", () => {
         clientDisconnect(client.id)
         player.died = true

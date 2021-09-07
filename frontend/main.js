@@ -1,4 +1,4 @@
-var socket = io()
+var socket = io("https://blooming-atoll-58157.herokuapp.com/")
 
 let canvas, ctx
 

@@ -22,6 +22,8 @@ const {
     getClientIndex,
 } = require("./utils/clients")
 
+const FRAME_RATE = require("./utils/constants")
+
 const app = express()
 const server = http.createServer(app)
 
@@ -49,7 +51,6 @@ io.on("connection", socket => {
     socket.on("createBullet", () => createBullet(player))
 
     socket.on("gameLoop", () => gameLoop())
-    socket.on("getGameState", () => io.emit("gameState", state))
 
     socket.on("setDark", () => {
         player.animationID = 2
@@ -66,6 +67,15 @@ io.on("connection", socket => {
         player.died = true
         console.log("A client has disconnected...")
     })
+
+    startGameInterval()
+
+    function startGameInterval() {
+        const intervalId = setInterval(() => {
+            gameLoop()
+            io.emit("gameState", state)
+        }, 100)
+    }
 })
 
 const PORT = process.env.PORT || 3000

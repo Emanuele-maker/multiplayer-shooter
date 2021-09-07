@@ -1,4 +1,4 @@
-var socket = io("https://blooming-atoll-58157.herokuapp.com/")
+var socket = io( /*"https://blooming-atoll-58157.herokuapp.com/"*/ )
 
 let canvas, ctx
 
@@ -168,10 +168,7 @@ function checkInputs() {
 }
 
 function renderGameState() {
-    socket.emit("gameLoop")
     checkInputs()
-
-    socket.emit("getGameState")
 
     socket.on("gameState", (state) => {
         ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT)

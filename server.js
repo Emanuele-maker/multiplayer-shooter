@@ -49,7 +49,7 @@ io.on("connection", socket => {
     socket.on("createBullet", () => createBullet(player))
 
     socket.on("gameLoop", () => gameLoop())
-    socket.on("getGameState", () => socket.emit("gameState", state))
+    socket.on("getGameState", () => io.emit("gameState", state))
 
     socket.on("disconnect", () => {
         clientDisconnect(client.id)

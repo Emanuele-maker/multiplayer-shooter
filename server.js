@@ -64,6 +64,7 @@ io.on("connection", socket => {
     socket.on("disconnect", () => {
         clientDisconnect(client.id)
         player.died = true
+        console.log("A client has disconnected...")
     })
 })
 

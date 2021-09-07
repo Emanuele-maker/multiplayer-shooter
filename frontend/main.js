@@ -50,11 +50,9 @@ function init() {
 
     window.addEventListener("keydown", handleKeyDown)
     window.addEventListener("keyup", handleKeyUp)
-    window.addEventListener("touchstart", (event) => {
-        const touches = event.touches
-        const touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[i0]
-        const x = touch.pageX
-        const y = touch.pageY
+    window.addEventListener("mousedown", (event) => {
+        const x = event.offsetX
+        const y = event.offsetY
         if (buttonPressed(x, y, mobileControls.leftButton)) {
             socket.emit("moveLeft")
         } else if (buttonPressed(x, y, mobileControls.rightButton)) {
@@ -67,6 +65,52 @@ function init() {
     })
 
     renderGameState()
+}
+
+const scaleUI = 80
+const offsetUI = 7
+
+const mobileControls = {
+    leftButton: {
+        scale: {
+            width: scaleUI,
+            height: scaleUI
+        },
+        position: {
+            x: offsetUI,
+            y: GAME_HEIGHT - scaleUI - offsetUI
+        }
+    },
+    rightButton: {
+        scale: {
+            width: scaleUI,
+            height: scaleUI
+        },
+        position: {
+            x: offsetUI * 2 + scaleUI,
+            y: GAME_HEIGHT - scaleUI - offsetUI
+        }
+    },
+    shootButton: {
+        scale: {
+            width: scaleUI,
+            height: scaleUI
+        },
+        position: {
+            x: GAME_WIDTH - offsetUI - scaleUI + 5,
+            y: GAME_HEIGHT - scaleUI - offsetUI
+        }
+    },
+    jumpButton: {
+        scale: {
+            width: scaleUI,
+            height: scaleUI
+        },
+        position: {
+            x: GAME_WIDTH - (offsetUI * 2) - (scaleUI * 2),
+            y: GAME_HEIGHT - scaleUI - offsetUI
+        }
+    }
 }
 
 function isMobile() {
@@ -120,52 +164,6 @@ function checkInputs() {
     }
     if (!keysPressed.includes(81)) {
         isPressing = false
-    }
-}
-
-const scaleUI = 80
-const offsetUI = 7
-
-const mobileControls = {
-    leftButton: {
-        scale: {
-            width: scaleUI,
-            height: scaleUI
-        },
-        position: {
-            x: offsetUI,
-            y: GAME_HEIGHT - scaleUI - offsetUI
-        }
-    },
-    rightButton: {
-        scale: {
-            width: scaleUI,
-            height: scaleUI
-        },
-        position: {
-            x: offsetUI * 2 + scaleUI,
-            y: GAME_HEIGHT - scaleUI - offsetUI
-        }
-    },
-    shootButton: {
-        scale: {
-            width: scaleUI,
-            height: scaleUI
-        },
-        position: {
-            x: GAME_WIDTH - offsetUI - scaleUI + 5,
-            y: GAME_HEIGHT - scaleUI - offsetUI
-        }
-    },
-    jumpButton: {
-        scale: {
-            width: scaleUI,
-            height: scaleUI
-        },
-        position: {
-            x: GAME_WIDTH - (offsetUI * 2) - (scaleUI * 2),
-            y: GAME_HEIGHT - scaleUI - offsetUI
-        }
     }
 }
 

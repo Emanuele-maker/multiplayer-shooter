@@ -191,7 +191,7 @@ function renderGameState() {
         const lava = state.lava
         ctx.drawImage(lavaImg, lava.position.x, lava.position.y, lava.scale.width, lava.scale.height)
 
-        if (!isMobile()) {
+        if (isMobile()) {
             const leftButton = mobileControls.leftButton
             const rightButton = mobileControls.rightButton
             const jumpButton = mobileControls.jumpButton
